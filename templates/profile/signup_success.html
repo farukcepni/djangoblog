@@ -1,0 +1,10 @@
+{% extends 'layout_twocol.html' %}
+{% load i18n %}
+{% block title %} {% trans 'Signup Success' %} {% endblock %}
+{% block content %}
+    <p>{% trans 'Signup Success' %}</p>
+    <p>{% trans 'We send an email to activate your account' %}</p>
+    <p>
+        {% trans 'Please, check the email inbox/junk folder and click the link.' %}
+    </p>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'layout_twocol.html' %}
+{% load i18n %}
+{% block title %}{%  trans 'Edit Profile' %}{% endblock %}
+{% block content %}
+    <h2>{% trans 'Edit Form' %}</h2>
+    <form action='' method='POST'>
+        {% csrf_token %}
+        <table>
+            {% for field in form %}
+            <tr>
+                <td><label for='id_{{ field.name }}'>{{ field.label }}</label></td>
+                <td>{{ field }}</td>
+                <td>
+                    {% if form.is_bound %}
+                        {{ field.errors.as_text }}
+                    {% else %}
+                        {{ field.help_text }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td>&nbsp</td>
+                <td>
+                    <input type='submit' value='{% if form_type == 'EDIT_FORM' %} Update {% else %}Signup{% endif %}' />
+                </td>
+            </tr>
+        </table>
+    </form>
+{% endblock %}

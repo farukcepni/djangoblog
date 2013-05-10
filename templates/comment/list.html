@@ -1,0 +1,17 @@
+{% load i18n %}
+<ul>
+    {% for comment in comments %}
+        <li class='main-child'
+            onclick="this.appendChild(document.getElementById('comment-form'));
+            document.getElementById('content_type').value='comment'
+            document.getElementById('object_id').value='{{ comment.id }}'">
+            {{ comment.comment }}
+            <small>{% trans 'Cevapla' %}</small>
+            <ul>
+            {% for child_comment in comment.get_children %}
+                <li>{{ child_comment.comment }}</li>
+            {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>

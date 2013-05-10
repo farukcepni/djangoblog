@@ -1,0 +1,42 @@
+{% extends 'layout_twocol.html' %}
+{% load i18n %}
+{% block title %}{% trans 'Post List' %}{% endblock %}
+{% block content %}
+    <div class='post-list'>
+        {% for post in post_list %}
+            <div class='post'>
+                <div class='title'>
+                    <h3 style='float:left'>
+                        <a href='{% url post post.slug post.id%}' style='float:left'>{{ post.title }}</a>
+                    </h3>
+                    <div class='title-info' style='float:right'>
+                        {% if post.status == 'DRAFT' %}
+                            <span>
+                                {% trans 'This post is shown only you' %}
+                            </span>
+                        {% endif %}
+                        {% if user.id == post.user_id %}
+                            &nbsp;
+                            <span>
+                                <a href='{% url edit_post post.id %}'>
+                                    {% trans 'Please, click to EDIT post' %}
+                                </a>
+                            </span>
+                        {% endif %}
+                    </div>
+                    <div style='clear:both'></div>
+                </div><!--.title-->
+                <div class='summary'>
+                    {{ post.summary|safe|linebreaks }}...
+                </div><!--.summary-->
+                <div class='info'>
+                    {% trans "Ekleyen" %}: {{ post.user.get_full_name }} |
+                    {% trans "Eklenme Tarihi" %}: {{ post.added_time|date:'d M Y' }} |
+                    {% trans "Son Güncellenme Tarihi" %}: {{ post.last_modified_time|date:'d M Y' }}
+                </div><!--.info-->
+            </div><!--.post-->
+        {% empty %}
+            <h1>{% trans 'There is no post'%}</h1>
+        {% endfor %}
+    </div>
+{% endblock %}

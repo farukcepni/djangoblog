@@ -1,0 +1,9 @@
+{% load i18n %}
+<form action='{% url create_comment %}' method='POST'>
+    {% csrf_token %}
+    <input type='hidden' value='{% url post post.slug post.id %}' name='next'/>
+    <input type='hidden' value='post' name='content_type' id='content_type' />
+    <input type='hidden' value='{{ post.id }}' name='object_id' id='object_id' />
+    <input type='text' value='' name='comment' />
+    <input type='submit' value='{% trans 'Yorum Ekle' %}' />
+</form>

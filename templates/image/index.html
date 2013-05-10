@@ -1,0 +1,36 @@
+{% extends 'layout_twocol.html' %}
+{% load i18n %}
+{% block content %}
+    <div class='upload-form'>
+        {% if image_form.errors %}
+            <div class='message error'>
+            {% for field, error in image_form.errors.items %}
+                {{ error.as_text }}
+            {% endfor %}
+            </div>
+        {% endif %}
+        <form action='' enctype='multipart/form-data' method='POST'>
+            {% csrf_token %}
+            {% for field in image_form %}
+                {{ field }}
+            {% endfor %}
+            <input type='submit' value='{% trans 'Upload The Image' %}' />
+        </form>
+    </div>
+
+    <div class='images'>
+        <ul>
+        {% for image in images %}
+            <li style='position:relative'>
+                <img src='/{{ image.get_thumb }}' />
+                <a href='{% url delete_image image.id %}'
+                   class='image-delete-link'>X</a>
+            </li>
+        {% empty %}
+            <div class='message info'>
+                {% trans 'There are not any images has already been uploaded' %}
+            </div>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

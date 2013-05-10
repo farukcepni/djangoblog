@@ -1,0 +1,41 @@
+{% extends 'layout_twocol.html' %}
+{% load i18n %}
+{% block content %}
+    <h4>
+        {{ form.new|yesno:_('Create New Post, Update The Existing Post') }}
+        {% if not form.new %}
+        <a href='{% url post form.instance.slug form.instance.id %}'
+           target='_blank'>
+            [{% trans 'Show The Post' %}]
+        </a>
+        {% endif %}
+    </h4>
+    <form action='' method='POST'>
+        {%  csrf_token %}
+        {% for message in messages %}
+            <div class='message {{ message.tags }}'>{{ message }}</div>
+        {% endfor %}
+        <table width="100%">
+            {% for field in form %}
+                <tr>
+                    <td>{{ field.label }}</td>
+                    <td>{{ field }}</td>
+                    <td>{{ field.errors.as_text }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td>&nbsp;</td>
+                <td><input type='submit' value="{% trans 'Save' %}" /></td>
+            </tr>
+        </table>
+    </form>
+    {% if images %}
+    <div class='post-images'>
+        {% for image in images %}
+            <a href='#' onclick="javascript:document.getElementById('id_content').value += '\n<img src=\'/{{ image.get_thumb }}\' />'">
+                <img src='/{{ image.get_thumb }}' />
+            </a>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endblock %}

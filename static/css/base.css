@@ -1,0 +1,68 @@
+body{ background-color:#F7F7F7; margin:0; padding:0;
+        font-family: 'Arial';}
+select, input, textarea{ border:1px solid #CCC; padding:5px 10px;}
+h1, h2, h3{ border:1px solid #DDD; background-color: #F9F9F9;
+             padding:5px 10px;}
+h1, h2, h3, h4{margin:0px; }
+#wrapper{ width:900px; margin:0 auto;}
+.page-header{ padding:10px 0}
+.page-middle{ padding:10px 0}
+.page-menu{ float:left; width:200px; }
+.page-menu a{ background-color:#E9E9E9; display:block; padding:5px;
+              margin-bottom:10px; color:#333; text-decoration:none;
+              font-weight: bold}
+.page-content{float:left; width:670px; padding-left:30px}
+form{margin:0; padding:0}
+form table label { font-size:15px; text-align:right; display: block}
+.post-list .title{ font-size:20px; border:none; border-bottom:1px solid #CCC;
+                   padding:0 }
+.post-list .title h3 {border:none}
+.post-list h3 a{ color:#333; font-weight: bold; text-decoration: none;
+                 display:block; padding:3px 10px }
+.post-list .title-info { font-size:12px;}
+.post-list h3 a:hover{color:#111; text-decoration:underline}
+.post-list .post { margin-bottom:30px; border:4px solid #DDD; }
+.post-list .summary{ padding:10px;}
+.post-list .info{ font-size:12px; border-top:1px solid #CCC;
+                  background-color:#DDD; line-height:14px;
+                  padding:6px 0 2px 10px; }
+.post h1{border:none; border-bottom:1px solid #CCC; padding:0px; }
+.post .content {border:6px solid #DDD; padding:10px}
+.post .info {background-color:#DDD; font-size:14px; padding-left:10px;}
+.post .user-message{text-align:right; background:#e9e9e9; line-height: 20px;}
+h4{padding:0 0 10px 0; border-bottom:1px solid #CCC}
+ul li{list-style:circle}
+
+.message{padding:10px; border:1px solid; margin:10px 0; }
+.success{color: #4F8A10; background-color: #DFF2BF;}
+.error{color: #D8000C;background-color: #FFBABA;}
+.info{color: #00529B;background-color: #BDE5F8;}
+.warning{color: #9F6000; background-color: #FEEFB3;}
+
+.has-child{list-style:none; }
+.comments ul {padding-left:30px;}
+.comment-form form{ margin:0; padding:1px 5px; border:1px solid #CCC;
+                    background-color:#e9e9e9}
+.comment-form form input[type=text] { width:100%;}
+input[type=file] {border:0; padding-top:0px;}
+.upload-form{background-color:#EEE; border:1px solid #CCC; padding:10px;}
+.images ul {padding:0; }
+.images ul li{ float:left; background-color: #eee; padding:5px;
+               border:1px solid #CCC; margin:0 10px 10px 0;
+               width:100px; height:100px; }
+
+.image-delete-link{ position:absolute; right:0; top:0; background-color:#FFF;
+                    color:#222; padding:0 2px; text-decoration: none;
+                    border:2px solid; text-align:center; font-size:13px;
+                    font-weight: bold}
+.images ul li img{ width:100%}
+
+table tr td input[type=text],
+table tr td input[type=password],
+table tr td select,
+table tr td textarea{width:90%}
+input[type=submit]{padding:10px 50px; font-weight: bold}
+.post-images{margin:10px; padding:10px; border:1px solid #999;
+    background-color: #e9e9e9; }
+.post-images a {text-decoration: none; }
+
