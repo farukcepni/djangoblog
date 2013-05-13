@@ -52,7 +52,7 @@ def signup(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             profile = form.save()
-            profile.send_activation_email(request)
+            profile.send_activation_email(  )
             return redirect('signup_success')
     else:
         form = SignupForm()
