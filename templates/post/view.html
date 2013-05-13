@@ -32,7 +32,7 @@
         <h4>{% trans 'Comments' %}</h4>
         {% include 'comment/list.html' %}
     </div>
-    {% if post.status == 'PUBLISHED' %}
+    {% if user.is_authenticated and post.status == 'PUBLISHED' %}
     <div id='comment-form' class='comment-form'>
         {% include 'comment/form.html' %}
     </div>

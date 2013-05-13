@@ -7,10 +7,15 @@ from post.models import Post
 from post.forms import PostForm
 from image.models import Image
 from django.db import connection, connections
+from django.views.decorators.cache import cache_page
+from django.core.cache import get_cache
 
 
 def post_view(request, post_slug, post_id):
-    post = get_object_or_404(Post.objects.select_related(), id=post_id)
+    post = Post.get(post_id)
+    if not post:
+        raise Http404('The post could not be found')
+
     if post.status != 'PUBLISHED' and post.user_id != request.user.id \
             or post.slug != post_slug:
         raise Http404('The post could not be found.')
@@ -26,7 +31,6 @@ def post_list(request, username=None):
     if username is not None:
         user = get_object_or_404(User, username=username)
         post_list = post_list.filter(user_id=user.id)
-
     return render(request, 'post/list.html', {'post_list': post_list})
 
 

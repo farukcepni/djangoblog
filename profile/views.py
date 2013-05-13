@@ -8,6 +8,7 @@ from forms import SignupForm, LoginForm, EditForm
 from models import Profile
 from django.core.signing import Signer
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import cache_page
 
 
 def index(request):

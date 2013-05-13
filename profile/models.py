@@ -46,8 +46,6 @@ class Profile(models.Model):
         self.user.email_user('Blog - User Account Activation',
                              mail_content,
                              'no-reply@blog.com')
-    def get_current_url(self):
-        from django.core.urlresolvers import resolve
-        current_url = resolve(request.path_info).url_name
+
     class Meta:
         db_table = 'profile'

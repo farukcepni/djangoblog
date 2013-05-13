@@ -4,6 +4,7 @@ from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
 from django.contrib.contenttypes import generic
 from comment.models import Comment
+from django.core.cache import get_cache
 
 
 class Post(models.Model):
@@ -36,6 +37,19 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Post, self).save()
+
+    @classmethod
+    def get(cls, post_id):
+        cache_key = 'POST_'+str(post_id)
+        cache = get_cache('default')
+        post = cache.get(cache_key)
+        if not post:
+            try:
+                post = Post.objects.select_related().get(id=post_id)
+            except:
+                post = None
+            cache.set(cache_key, post, 60*10)
+        return post
 
     class Meta:
         db_table = 'post'
