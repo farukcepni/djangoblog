@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from PIL import Image as PILImage
 import os
+from tasks import create_thumbs
 from settings import MEDIA_ROOT
 
 
@@ -14,7 +15,8 @@ class Image(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None):
         super(Image, self).save()
-        self._create_thumbs()
+        #create_thumbs(self)
+        create_thumbs.delay(self)
 
     @property
     def get_thumb(self):

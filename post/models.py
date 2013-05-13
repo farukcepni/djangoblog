@@ -24,7 +24,6 @@ class Post(models.Model):
     last_modified_time = models.DateTimeField(auto_now=True)
     comments = generic.GenericRelation(Comment)
 
-
     @property
     def summary(self):
         return self.content[0:300]
@@ -34,9 +33,14 @@ class Post(models.Model):
             return self.user.email
         return self.user.first_name + ' ' + self.user.last_name
 
+    def _cache_key(self):
+        return 'POST_' + str(self.id)
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Post, self).save()
+        cache = get_cache('default')
+        cache.delete(self._cache_key())
 
     @classmethod
     def get(cls, post_id):
