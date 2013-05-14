@@ -31,3 +31,6 @@ urlpatterns = patterns('',
 
     url(r'^(.*)$', 'profile.views.profile')
 )
+
+handler404 = 'default.page_not_found'
+handler500 = 'default.server_error'
