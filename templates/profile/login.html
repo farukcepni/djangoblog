@@ -4,11 +4,11 @@
 {% block content %}
     <h1>{% trans 'Login to Blog' %}</h1>
     {% if messages %}
-    <div class='message error'>
-        {% for message in messages %}
-            {{ message }}
-        {% endfor %}
-    </div>
+        <div class='message error'>
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
     {% endif %}
     <form action='' method='POST'>
         {% csrf_token %}
@@ -16,7 +16,8 @@
             <tr>
                 <td>{{ form.email.label }}</td>
                 <td>{{ form.email }}</td>
-                <td>{{ form.email.errors.as_text }}</td>
+                <td>{{ form.email.errors.as_text }}
+                    {{ form.email.non_field_errors.as_text }}</td>
             </tr>
             <tr>
                 <td>{{ form.password.label }}</td>

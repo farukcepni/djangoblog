@@ -3,12 +3,12 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from django.http import Http404, HttpResponse
 from django.contrib.auth.models import User
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from forms import SignupForm, LoginForm, EditForm
 from models import Profile
 from django.core.signing import Signer
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.cache import cache_page
+from django.contrib import messages
 
 
 def index(request):
@@ -52,7 +52,7 @@ def signup(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             profile = form.save()
-            profile.send_activation_email(  )
+            profile.send_activation_email()
             return redirect('signup_success')
     else:
         form = SignupForm()
@@ -66,21 +66,17 @@ def signup_success(request):
 
 def login_view(request):
     if request.POST:
-        form = LoginForm(data=request.POST)
+        form = LoginForm(request.POST)
         if form.is_valid():
-            user = Profile.authenticate(
-                email=form.cleaned_data['email'],
-                password=form.cleaned_data['password'])
-            if user is not None:
-                login(request, user)
-                redirect_url = request.GET.get('next') or \
-                    reverse('profile', args=(user.username,))
-                return redirect(redirect_url)
+            user = authenticate(email=form.cleaned_data['email'],
+                                password=form.cleaned_data['password'])
+            if user is None:
+                messages.error(request, _('The email or password are wrong!'))
             else:
-                form._errors['email'] = form.error_class(
-                    [_('E-mail or password are wrong')])
+                login(request, user)
+                return redirect(request.GET.get('next') or reverse('index'))
     else:
-        form = LoginForm()
+        form = LoginForm
     return render(request, 'profile/login.html', {'form': form})
 
 

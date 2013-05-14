@@ -19,20 +19,6 @@ class Profile(models.Model):
 
 
     @classmethod
-    def authenticate(cls, *args, **kwargs):
-        from django.contrib.auth import authenticate, login
-        if kwargs.get('username') is None:
-            try:
-                user = User.objects.get(email__iexact=kwargs.get('email'))
-                username = user.username
-            except:
-                return None
-        user = authenticate(username=username,
-                            password=kwargs.get('password'))
-        return user or None
-
-
-    @classmethod
     def is_email_exists(cls, email):
         email_count = User.objects.filter(email=email).count()
         return email_count > 0 or False

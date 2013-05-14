@@ -4,7 +4,7 @@ import os
 
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -25,7 +25,7 @@ DATABASES = {
 }
 
 djcelery.setup_loader()
-
+AUTHENTICATION_BACKENDS = ['profile.backend.AuthenticationBackend']
 LOGIN_URL = '/profile/login'
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
@@ -122,7 +122,8 @@ ROOT_URLCONF = 'urls'
 WSGI_APPLICATION = 'wsgi.application'
 
 TEMPLATE_DIRS = (
-    PROJECT_PATH + '/templates'
+    PROJECT_PATH + '/templates',
+    '/home/farukcepni/Sites/blog_env/blog/templates'
 )
 
 INSTALLED_APPS = (

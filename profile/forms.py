@@ -39,9 +39,6 @@ class EditForm(forms.ModelForm):
 
 
 class SignupForm(forms.ModelForm):
-    # TODO: set the Field.error_messages via function
-    # like {'required': '%s field is required'}
-
     email = forms.EmailField(label=_('E-mail'),
                              help_text=_('E-mail field is required'),
                              error_messages={
@@ -77,39 +74,18 @@ class SignupForm(forms.ModelForm):
         profile.save()
         return profile
 
-    def _password_match(self):
-        password = self.data.get('password')
-        password_again = self.data.get('password_again')
-        if password != '' and password_again != '' and \
-           password == password_again:
-            return True
-        else:
-            self._errors['password_again'] = self.error_class(
-                [_('Password again and password fields must be same')]
-            )
-            return False
+    def clean_email(self):
+        if Profile.is_email_exists(self.cleaned_data['email']):
+            raise forms.ValidationError(_('This email has been already taken'))
+        return self.cleaned_data['email']
 
-    def _email_exists(self):
-        is_email_exists = Profile.is_email_exists(self.data.get('email'))
-        if is_email_exists is True:
-            self._errors['email'] = self.error_class(
-                [_('This E-mail has already taken.')]
-            )
-            return True
-        else:
-            return False
-
-    def is_valid(self):
-        # override is_valid() method to check
-        #   password == password_again
-        form_valid = super(SignupForm, self).is_valid()
-        password_match = self._password_match()
-        if form_valid is True and \
-                password_match is True and \
-                self._email_exists() is False:
-            return True
-        else:
-            return False
+    def clean(self):
+        cleaned_data = super(SignupForm, self).clean()
+        if 'password' in cleaned_data and 'password_again' in cleaned_data and\
+                cleaned_data['password'] != cleaned_data['password_again']:
+            self._errors['password_again'] = self.error_class([_(
+                'Password again must be same with password')])
+        return cleaned_data
 
 
 class LoginForm(forms.Form):
