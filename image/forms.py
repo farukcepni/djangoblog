@@ -1,18 +1,23 @@
-from django.forms import forms
+from django import forms
 from django.utils.translation import ugettext as _
+import os
+from models import Image
 
 
 class ImageForm(forms.Form):
-    ALLOWED_EXTS = ('jpg', 'png', 'bmp')
-    ALLOWED_TYPES = ('image/jpeg', )
-    image = forms.FileField(label=_('Select a file'), allow_empty_file=False)
+    image = forms.FileField(label=_('Select an Image File'),
+                            allow_empty_file=False)
 
-    def is_valid_image(self):
-        error_message = _('The uploaded file is not allowed')
-        ext = self.cleaned_data['image'].name[-3:]
-        file_type = self.cleaned_data['image'].content_type
-        if ext in self.ALLOWED_EXTS and file_type in self.ALLOWED_TYPES:
-            return True
-        else:
-            self._errors['type_error'] = self.error_class([error_message])
-            return False
+    def clean_image(self):
+        """
+        Check size, ext and type of the uploaded image
+        """
+        image = self.cleaned_data.get('image')
+        ext = os.path.splitext(os.path.basename(image.name))[1][1:]
+        if image._size > Image.MAX_SIZE:
+            raise forms.ValidationError(_('Max file size: %d MB' %
+                                          (Image.MAX_SIZE / 1024**2)))
+        if ext not in Image.ALLOWED_EXTS or\
+                image.content_type not in Image.ALLOWED_TYPES:
+            raise forms.ValidationError(_('The uploaded image is not allowed'))
+        return image

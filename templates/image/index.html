@@ -2,18 +2,14 @@
 {% load i18n %}
 {% block content %}
     <div class='upload-form'>
-        {% if image_form.errors %}
+        {% if image_form.image.errors %}
             <div class='message error'>
-            {% for field, error in image_form.errors.items %}
-                {{ error.as_text }}
-            {% endfor %}
+            {{ image_form.image.errors.as_text }}
             </div>
         {% endif %}
         <form action='' enctype='multipart/form-data' method='POST'>
             {% csrf_token %}
-            {% for field in image_form %}
-                {{ field }}
-            {% endfor %}
+            {{ image_form.image }}
             <input type='submit' value='{% trans 'Upload The Image' %}' />
         </form>
     </div>
@@ -22,7 +18,7 @@
         <ul>
         {% for image in images %}
             <li style='position:relative'>
-                <img src='/{{ image.get_thumb }}' />
+                <img src='{{ image.get_thumb }}' />
                 <a href='{% url delete_image image.id %}'
                    class='image-delete-link'>X</a>
             </li>

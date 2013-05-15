@@ -2,12 +2,11 @@ from django.conf.urls import patterns, include, url
 # Uncomment the next two lines to enable the admin:
 from django.conf import settings
 from django.contrib import admin
-import profile
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^admin/', include(admin.site.urls)),
-    # admin Page
 
     url(r'^profile/', include('profile.urls')),
     # Profile pages - signup, login, logout and etc.
@@ -31,6 +30,13 @@ urlpatterns = patterns('',
 
     url(r'^(.*)$', 'profile.views.profile')
 )
+
+if settings.DEBUG is True:
+    urlpatterns = patterns(
+        '',
+        url(r'^media/(?P<path>.*)$',
+            'django.views.static.serve',
+            {'document_root': settings.MEDIA_ROOT})) + urlpatterns
 
 handler404 = 'default.page_not_found'
 handler500 = 'default.server_error'
