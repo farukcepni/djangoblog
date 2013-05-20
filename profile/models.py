@@ -24,7 +24,8 @@ class Profile(models.Model):
         return email_count > 0 or False
 
     def send_activation_email(self):
-        activation_url = 'http://localhost:8000' + \
+        from django.conf import settings
+        activation_url = settings.BASE_URL + \
             reverse('activate_the_profile') + '?email=' + \
             Signer().sign(self.user.email)
         mail_content = 'To Activate the your account visit the below link; '
@@ -32,6 +33,17 @@ class Profile(models.Model):
         self.user.email_user('Blog - User Account Activation',
                              mail_content,
                              'no-reply@blog.com')
+
+    def send_email_to_change_mail(self, email):
+        from django.conf import settings
+        from django.core.mail import send_mail
+        activation_url = settings.BASE_URL + \
+            reverse('change_email') + '?email=' + \
+            Signer().sign(self.user.email) + '&to=' + Signer().sign(email)
+        mail_content = 'To change your e-mail visit the below link; '
+        mail_content += activation_url
+        send_mail('Blog - Change your email address', mail_content,
+                  'no-reply@blog.com', [email])
 
     class Meta:
         db_table = 'profile'

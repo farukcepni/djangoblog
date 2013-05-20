@@ -1,14 +1,14 @@
-from django.http import  Http404
+from django.http import Http404
+from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
 from post.models import Post
 from post.forms import PostForm
 from image.models import Image
-from django.db import connection, connections
-from django.views.decorators.cache import cache_page
-from django.core.cache import get_cache
+from comment.forms import AuthorizedCommentForm, AnonymousCommentForm
+from comment.models import Comment
+from django.contrib import messages
 
 
 def post_view(request, post_slug, post_id):
@@ -19,9 +19,19 @@ def post_view(request, post_slug, post_id):
     if post.status != 'PUBLISHED' and post.user_id != request.user.id \
             or post.slug != post_slug:
         raise Http404('The post could not be found.')
-    comments = post.comments.all()
+
+    comments = Comment.get_comments(post)
+    if post.status != 'DRAFT':
+        comment_form = request.user.is_authenticated() and\
+            AuthorizedCommentForm or AnonymousCommentForm
+        comment_form = comment_form(initial={
+            'root_ctype_name': 'post', 'root_object_id': post.id,
+            'next_page': reverse('post', args=[post.slug, post.id])})
+    else:
+        comment_form = None
     return render(request, 'post/view.html', {'post': post,
-                                              'comments': comments})
+                                              'comments': comments,
+                                              'comment_form': comment_form})
 
 
 def post_list(request, username=None):

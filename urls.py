@@ -14,6 +14,8 @@ urlpatterns = patterns(
     url(r'^create_comment', 'comment.views.create_comment',
         name='create_comment'),
 
+    url(r'^comment/confirm', 'comment.views.confirm_via_email', name='confirm_comment'),
+
     url(r'^image/$', 'image.views.index', name='image_index'),
     url(r'^image/delete/(.*)[/]$', 'image.views.delete', name='delete_image'),
 

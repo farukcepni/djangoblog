@@ -1,16 +1,17 @@
 {% load i18n %}
 <ul>
-    {% for comment in comments %}
+    {% for key, comment in comments.items %}
+        {% include 'comment/tree.html' %}
         <li class='main-child'
             onclick="this.appendChild(document.getElementById('comment-form'));
-            document.getElementById('content_type').value='comment'
-            document.getElementById('object_id').value='{{ comment.id }}'">
+            document.getElementById('id_parent_comment').value='{{ comment.id }}'">
             {{ comment.comment }}
             <small>{% trans 'Cevapla' %}</small>
             <ul>
-            {% for child_comment in comment.get_children %}
-                <li>{{ child_comment.comment }}</li>
-            {% endfor %}
+                {% for key, child_comment in comment.children.items %}
+                     <li>{{ child_comment.comment }}
+                     {{ child_comment.commented_by.get_full_name }}</li>
+                {% endfor %}
             </ul>
         </li>
     {% endfor %}

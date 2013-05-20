@@ -25,12 +25,11 @@ class EditForm(forms.ModelForm):
         user = self.instance.user
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
-        user.email = self.cleaned_data['email']
         user.is_active = self.cleaned_data['account_type'] == 'True' or False
         user.save()
         if old_email != self.cleaned_data['email']:
-            self.instance.is_verified = False
-            self.instance.send_activation_email()
+            self.instance.send_email_to_change_mail(self.cleaned_data['email'])
+            self.cleaned_data['email'] = old_email
 
     class Meta:
         model = Profile

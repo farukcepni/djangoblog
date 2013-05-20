@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from forms import SignupForm, LoginForm, EditForm
 from models import Profile
-from django.core.signing import Signer
+from django.core.signing import Signer, BadSignature
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
@@ -31,7 +31,7 @@ def activate_the_profile(request):
         raise Http404('The page could not be found')
     try:
         email = Signer().unsign(request.GET.get('email'))
-    except:
+    except BadSignature:
         raise Http404()
     user = User.objects.select_related().get(email__iexact=email)
     user.profile.is_verified = True
@@ -39,10 +39,23 @@ def activate_the_profile(request):
     return HttpResponse(_('Thank you to activate the your account'))
 
 
+def change_email_via_mail(request):
+    if not request.GET:
+        raise Http404()
+    try:
+        email = Signer().unsign(request.GET.get('email'))
+        to = Signer().unsign(request.GET.get('to'))
+        user = User.objects.get(email__iexact=email)
+        user.email = to
+        user.save()
+    except (BadSignature, User.DoesNotExist) as e:
+        raise Http404()
+    return HttpResponse('Changed your account email')
+
 def profile(request, username):
     try:
         user = User.objects.select_related().get(username=username)
-    except:
+    except User.DoesNotExist:
         raise Http404("User Not Found")
     return render(request, 'profile/profile.html', {'user': user})
 
@@ -72,6 +85,8 @@ def login_view(request):
                                 password=form.cleaned_data['password'])
             if user is None:
                 messages.error(request, _('The email or password are wrong!'))
+            elif user.profile.is_verified is False:
+                messages.error(request, _('Please verified your e-mail'))
             else:
                 login(request, user)
                 return redirect(request.GET.get('next') or reverse('index'))

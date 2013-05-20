@@ -32,8 +32,8 @@
     {% if images %}
     <div class='post-images'>
         {% for image in images %}
-            <a href='#' onclick="javascript:document.getElementById('id_content').value += '\n<img src=\'/{{ image.get_thumb }}\' />'">
-                <img src='/{{ image.get_thumb }}' />
+            <a href='#' onclick="javascript:document.getElementById('id_content').value += '\n<img src=\'{{ image.get_thumb }}\' />'">
+                <img src='{{ image.get_thumb }}' />
             </a>
         {% endfor %}
     </div>

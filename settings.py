@@ -10,7 +10,6 @@ TEMPLATE_DEBUG = DEBUG
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
-
 MANAGERS = ADMINS
 
 DATABASES = {
@@ -27,7 +26,7 @@ DATABASES = {
 djcelery.setup_loader()
 AUTHENTICATION_BACKENDS = ['profile.backend.AuthenticationBackend']
 LOGIN_URL = '/profile/login'
-
+BASE_URL = 'http://localhost:8000'
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ['localhost']

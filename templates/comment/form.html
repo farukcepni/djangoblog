@@ -1,9 +1,41 @@
 {% load i18n %}
+{{ messages }}
+<div id='comment-form'>
 <form action='{% url create_comment %}' method='POST'>
-    {% csrf_token %}
-    <input type='hidden' value='{% url post post.slug post.id %}' name='next'/>
-    <input type='hidden' value='post' name='content_type' id='content_type' />
-    <input type='hidden' value='{{ post.id }}' name='object_id' id='object_id' />
-    <input type='text' value='' name='comment' />
-    <input type='submit' value='{% trans 'Yorum Ekle' %}' />
+    <input type='hidden' name='csrfmiddlewaretoken' id='csrf_token' value='' />
+    {% for field in form.hidden_fields %}
+        {{ field }}
+    {% endfor %}
+    {% if form.COMMENT_TYPE == 'ANONYMOUS' %}
+    <table id='comment-form'>
+    {% for field in form.visible_fields %}
+        <tr>
+            <td>{{ field.label }}</td>
+            <td>{{ field }}</td>
+            <td>{{ field.error }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+    {% else %}
+        {{ form.comment }}
+    {% endif %}
+    <input type='submit' value='{% trans 'Add Comment' %}' />
 </form>
+</div>
+<script type='text/javascript'>
+    function getCookie(cookie_name) {
+        var cookie = document.cookie;
+        var cookie_val = ''
+        var cookie_start = cookie.indexOf(cookie_name + '=');
+        if (cookie_start > -1) {
+            var cookie_end = cookie.indexOf(';', cookie_start);
+            if (cookie_end == -1) {
+                cookie_end = cookie.length;
+            }
+            cookie_value_start = cookie_start + cookie_name.length;
+            cookie_val = cookie.substring(cookie_value_start+1, cookie_end)
+        }
+        return cookie_val
+    }
+    document.getElementById('csrf_token').value = getCookie('csrftoken');
+</script>
