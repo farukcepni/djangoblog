@@ -1,7 +1,7 @@
 from django import forms
 from comment.models import Comment
 from django.template import Template, Context, loader
-from django.utils.translation import gettext as _
+from django.utils.translation import ugettext as _
 from django.core.urlresolvers import reverse
 
 

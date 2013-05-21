@@ -5,7 +5,7 @@ from django.contrib import messages
 from comment.models import Comment
 from django.core.signing import Signer
 from django.shortcuts import Http404, HttpResponse
-from django.utils.translation import gettext as _
+from django.utils.translation import ugettext as _
 
 def create_comment(request):
     redirect_page = 'index'

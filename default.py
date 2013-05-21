@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.utils.translation import gettext as _
+from django.utils.translation import ugettext as _
 
 
 def page_not_found(request):
