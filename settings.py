@@ -120,6 +120,11 @@ ROOT_URLCONF = 'urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'wsgi.application'
 
+FIXTURE_DIRS = (
+    os.path.join(PROJECT_PATH, 'fixtures', 'post'),
+    os.path.join(PROJECT_PATH, 'fixtures', 'comment'),
+)
+
 TEMPLATE_DIRS = (
     PROJECT_PATH + '/templates',
     '/home/farukcepni/Sites/blog_env/blog/templates'
