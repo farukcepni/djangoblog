@@ -1,0 +1,299 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-05-21 13:09+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: default.py:6
+msgid "Page Not Found"
+msgstr "The Page could not be found"
+
+#: default.py:9
+msgid "Server Error"
+msgstr ""
+
+#: comment/forms.py:24
+msgid "Full name"
+msgstr ""
+
+#: comment/forms.py:25 profile/forms.py:41 profile/forms.py:91
+msgid "E-mail"
+msgstr "Your E-mail address"
+
+#: comment/forms.py:32 comment/forms.py:53
+msgid "Your comment could not be saved"
+msgstr ""
+
+#: comment/forms.py:35
+msgid ""
+"Your comment was saved succesfully. And we send an email to confirm your "
+"email. Your comment will be showed after e-mail confirmation"
+msgstr ""
+
+#: comment/forms.py:56
+msgid "Your comment was saved succesfully"
+msgstr ""
+
+#: comment/models.py:21
+msgid "comment"
+msgstr ""
+
+#: comment/models.py:24 post/models.py:21
+msgid "status"
+msgstr ""
+
+#: comment/models.py:26 post/models.py:23
+msgid "added time"
+msgstr ""
+
+#: comment/models.py:69
+msgid "Confirm Comment"
+msgstr ""
+
+#: comment/views.py:47
+msgid "Your comment has been already APPROVED"
+msgstr ""
+
+#: comment/views.py:49
+msgid "Your comment has been DECLINED"
+msgstr ""
+
+#: comment/views.py:53
+msgid "Your comment has been confirmed successfully"
+msgstr ""
+
+#: image/forms.py:8
+msgid "Select an Image File"
+msgstr ""
+
+#: image/forms.py:18
+#, python-format
+msgid "Max file size: %d MB"
+msgstr ""
+
+#: image/forms.py:22
+msgid "The uploaded image is not allowed"
+msgstr ""
+
+#: post/models.py:12
+msgid "title"
+msgstr ""
+
+#: post/models.py:13
+msgid "slug"
+msgstr ""
+
+#: post/models.py:14 post/models.py:61
+msgid "post"
+msgstr ""
+
+#: post/models.py:62
+msgid "posts"
+msgstr ""
+
+#: profile/forms.py:42
+msgid "E-mail field is required"
+msgstr ""
+
+#: profile/forms.py:47 profile/forms.py:93
+msgid "Password"
+msgstr ""
+
+#: profile/forms.py:48
+msgid "Password must be at least 6 chars"
+msgstr ""
+
+#: profile/forms.py:50
+msgid "Password Again"
+msgstr ""
+
+#: profile/forms.py:51
+msgid ""
+"Password must be same                                      with the password"
+msgstr ""
+
+#: profile/forms.py:78
+msgid "This email has been already taken"
+msgstr ""
+
+#: profile/forms.py:86
+msgid "Password again must be same with password"
+msgstr ""
+
+#: profile/models.py:9
+msgid "Male"
+msgstr ""
+
+#: profile/models.py:9
+msgid "Female"
+msgstr ""
+
+#: profile/models.py:13 templates/profile/profile.html:21
+msgid "Birthdate"
+msgstr ""
+
+#: profile/models.py:16 templates/profile/profile.html:17
+msgid "Gender"
+msgstr ""
+
+#: profile/models.py:18
+msgid "Verified"
+msgstr ""
+
+#: profile/views.py:39
+msgid "Thank you to activate the your account"
+msgstr ""
+
+#: profile/views.py:87
+msgid "The email or password are wrong!"
+msgstr ""
+
+#: profile/views.py:89
+msgid "Please verified your e-mail"
+msgstr ""
+
+#: templates/404.html:4
+msgid "Page could not be found"
+msgstr ""
+
+#: templates/500.html:4
+msgid "Server Internal Error"
+msgstr ""
+
+#: templates/comment/form.html:22
+msgid "Add Comment"
+msgstr ""
+
+#: templates/image/index.html:13
+msgid "Upload The Image"
+msgstr ""
+
+#: templates/image/index.html:27
+msgid "There are not any images has already been uploaded"
+msgstr ""
+
+#: templates/post/form.html:5
+msgid "Create New Post, Update The Existing Post"
+msgstr ""
+
+#: templates/post/form.html:9
+msgid "Show The Post"
+msgstr ""
+
+#: templates/post/form.html:28
+msgid "Save"
+msgstr ""
+
+#: templates/post/list.html:3
+msgid "Post List"
+msgstr ""
+
+#: templates/post/list.html:15
+msgid "This post is shown only you"
+msgstr ""
+
+#: templates/post/list.html:22
+msgid "Please, click to EDIT post"
+msgstr ""
+
+#: templates/post/list.html:33 templates/post/view.html:25
+msgid "Ekleyen"
+msgstr ""
+
+#: templates/post/list.html:34 templates/post/view.html:26
+msgid "Eklenme Tarihi"
+msgstr ""
+
+#: templates/post/list.html:35 templates/post/view.html:27
+msgid "Son Güncellenme Tarihi"
+msgstr ""
+
+#: templates/post/list.html:39
+msgid "There is no post"
+msgstr ""
+
+#: templates/post/view.html:9
+msgid "This post is shown only for you"
+msgstr ""
+
+#: templates/post/view.html:15
+msgid "Please, click to edit post"
+msgstr ""
+
+#: templates/profile/edit.html:3
+msgid "Edit Profile"
+msgstr ""
+
+#: templates/profile/edit.html:5
+msgid "Edit Form"
+msgstr ""
+
+#: templates/profile/login.html:3 templates/profile/login.html.py:5
+msgid "Login to Blog"
+msgstr ""
+
+#: templates/profile/login.html:29
+msgid "Login"
+msgstr ""
+
+#: templates/profile/password_change.html:26
+msgid "Change Password"
+msgstr ""
+
+#: templates/profile/password_change_done.html:5
+msgid "Your password has been changed"
+msgstr ""
+
+#: templates/profile/profile.html:9
+msgid "Username"
+msgstr ""
+
+#: templates/profile/profile.html:13
+msgid "e-Mail"
+msgstr ""
+
+#: templates/profile/profile.html:18 templates/profile/profile.html.py:22
+msgid "Not Specified"
+msgstr ""
+
+#: templates/profile/profile.html:25
+msgid "Register Time"
+msgstr ""
+
+#: templates/profile/profile.html:29
+msgid "Last Login Time"
+msgstr ""
+
+#: templates/profile/profile.html:35
+msgid "Show User Posts"
+msgstr ""
+
+#: templates/profile/signup.html:5
+msgid "Signup Form"
+msgstr ""
+
+#: templates/profile/signup_success.html:3
+#: templates/profile/signup_success.html:5
+msgid "Signup Success"
+msgstr ""
+
+#: templates/profile/signup_success.html:6
+msgid "We send an email to activate your account"
+msgstr ""
+
+#: templates/profile/signup_success.html:8
+msgid "Please, check the email inbox/junk folder and click the link."
+msgstr ""
