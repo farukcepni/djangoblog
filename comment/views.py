@@ -41,7 +41,7 @@ def confirm_via_email(request):
     try:
         comment_id = int(Signer().unsign(request.GET.get('comment')))
         comment = Comment.objects.get(id=comment_id)
-    except:
+    except Comment.DoesNotExist:
         raise Http404('The page could not be found')
     if comment.status == 'APPROVED':
         return HttpResponse(_('Your comment has been already APPROVED'))

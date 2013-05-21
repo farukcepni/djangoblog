@@ -50,7 +50,7 @@ class Post(models.Model):
         if not post:
             try:
                 post = Post.objects.select_related().get(id=post_id)
-            except:
+            except Post.DoesNotExist:
                 post = None
             cache.set(cache_key, post, 60*10)
         return post

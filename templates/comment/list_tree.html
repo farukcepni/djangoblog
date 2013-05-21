@@ -1,0 +1,15 @@
+<li class='main-child'>
+    <b>{{ comment.comment }}</b>
+    <small> by {{ comment.commented_by }}</small>
+    {% if comment.children|length > 0 %}
+        <ul>
+            <li class='has-child'>
+            {% for children in comment.children.values %}
+                {% with comment=children template_name='comment/list_tree.html' %}
+                   {% include template_name %}
+                {% endwith %}
+            {% endfor %}
+            </li>
+        </ul>
+    {% endif %}
+</li>
