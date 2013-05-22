@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 
 class BaseCommentForm(forms.ModelForm):
     next_page = forms.CharField(widget=forms.HiddenInput())
-    root_ctype_name = forms.CharField(widget=forms.HiddenInput())
+    root_ctype_id = forms.CharField(widget=forms.HiddenInput())
     root_object_id = forms.CharField(widget=forms.HiddenInput())
     parent_comment = forms.CharField(widget=forms.HiddenInput(), initial=0)
     comment_type = forms.CharField(widget=forms.HiddenInput)

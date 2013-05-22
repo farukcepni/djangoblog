@@ -19,8 +19,9 @@ def create_comment(request):
             new_comment = form.save(commit=False)
             new_comment.commented_by_user = request.user.is_authenticated()\
                 and request.user or None
-            new_comment.root_ctype = ContentType.objects.get(
-                app_label='post', model='post')
+            new_comment.root_ctype = ContentType.objects.get_for_id(
+                form.cleaned_data['root_ctype_id']
+            )
             new_comment.save(True)
             if new_comment.status == 'PENDING':
                 new_comment.send_email_to_confirm()

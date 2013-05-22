@@ -1,5 +1,3 @@
-<ul>
-    {% for comment in comments.values %}
-        {% include 'comment/list_tree.html' %}
-    {% endfor %}
-</ul>
+{% for comment in comments.values %}
+    {% include 'comment/list_tree.html' %}
+{% endfor %}

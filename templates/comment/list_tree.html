@@ -1,8 +1,10 @@
-<li class='main-child'>
+<ul>
+<li class='main-child'
+        onclick="this.appendChild(document.getElementById('comment-form'));
+                document.getElementById('id_parent_comment').value='{{ comment.id }}'">
     <b>{{ comment.comment }}</b>
     <small> by {{ comment.commented_by }}</small>
     {% if comment.children|length > 0 %}
-        <ul>
             <li class='has-child'>
             {% for children in comment.children.values %}
                 {% with comment=children template_name='comment/list_tree.html' %}
@@ -10,6 +12,6 @@
                 {% endwith %}
             {% endfor %}
             </li>
-        </ul>
     {% endif %}
 </li>
+</ul>

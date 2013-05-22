@@ -40,7 +40,7 @@ ul li{list-style:circle}
 .warning{color: #9F6000; background-color: #FEEFB3;}
 
 .has-child{list-style:none; }
-.comments ul {padding-left:30px;}
+.comment-list ul { padding:5px 0 0px 30px; margin:0}
 .comment-form form{ margin:0; padding:1px 5px; border:1px solid #CCC;
                     background-color:#e9e9e9}
 .comment-form form input[type=text] { width:100%;}

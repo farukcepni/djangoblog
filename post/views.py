@@ -9,6 +9,7 @@ from image.models import Image
 from comment.forms import AuthorizedCommentForm, AnonymousCommentForm
 from comment.models import Comment
 from django.contrib import messages
+from django.contrib.contenttypes.models import ContentType
 
 
 def post_view(request, post_slug, post_id):
@@ -25,7 +26,8 @@ def post_view(request, post_slug, post_id):
         comment_form = request.user.is_authenticated() and\
             AuthorizedCommentForm or AnonymousCommentForm
         comment_form = comment_form(initial={
-            'root_ctype_name': 'post', 'root_object_id': post.id,
+            'root_ctype_id': ContentType.objects.get_for_model(Post).id,
+            'root_object_id': post.id,
             'next_page': reverse('post', args=[post.slug, post.id])})
     else:
         comment_form = None
