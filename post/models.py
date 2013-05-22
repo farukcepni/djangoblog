@@ -6,7 +6,6 @@ from django.contrib.contenttypes import generic
 from comment.models import Comment
 from django.core.cache import get_cache
 
-
 class Post(models.Model):
     user = models.ForeignKey(User)
     title = models.CharField(max_length=255, verbose_name=_('title'))
@@ -44,6 +43,7 @@ class Post(models.Model):
 
     @classmethod
     def get(cls, post_id):
+        from django.core.cache import get_cache
         cache_key = 'POST_'+str(post_id)
         cache = get_cache('default')
         post = cache.get(cache_key)

@@ -98,6 +98,7 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
 )
 
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -143,7 +144,7 @@ INSTALLED_APPS = (
     'post',
     'comment',
     'profile',
-    'image'
+    'image',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -185,3 +186,13 @@ LOGGING = {
         },
     }
 }
+import sys
+sys.path.append('/home/farukcepni/Sites/blog_env',)
+# Debug Toolbar settings
+INTERNAL_IPS = ('127.0.0.1',)
+MIDDLEWARE_CLASSES += (
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+)
+INSTALLED_APPS += (
+    'debug_toolbar',
+)
