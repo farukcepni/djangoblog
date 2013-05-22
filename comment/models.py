@@ -5,6 +5,7 @@ from django.utils.datastructures import SortedDict
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 
+
 class Comment(models.Model):
     CHOICES_FOR_USER = (('PENDING', 'Pending'), ('APPROVED', 'Approved'))
     CHOICES_FOR_ADMIN = (('DECLINED', 'Declined'), )
@@ -37,12 +38,6 @@ class Comment(models.Model):
 
     @classmethod
     def get_comments(cls, obj):
-        from django.core.cache import get_cache
-        cache = get_cache('default')
-        cache_key = 'COMMENT_LIST_' + obj.__class__.__name__ + str(obj.id)
-        comments = cache.get(cache_key)
-        if comments is not None:
-            return comments
         comments = cls.objects.select_related('commented_by_user').filter(
             root_ctype=ContentType.objects.get_for_model(obj),
             root_object_id=obj.id)
@@ -65,7 +60,6 @@ class Comment(models.Model):
                         inst_ct = inst_ct.children
                 inst_ct[comment.parent_comment].children[comment.id] = comment
                 parent_tree[comment.id] = parent + (comment.parent_comment,)
-        cache.set(cache_key,  comment_tree[0]['children'])
         return comment_tree[0]['children']
 
     def send_email_to_confirm(self):
